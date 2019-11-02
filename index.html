@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <input type="file" onchange="readFile(event)" multiple="true">
+  <script>
+    function readFile(event) {
+      const { target: { files } } = event;
+      console.log(files)
+      FileUpload(files)
+    }
+    function FileUpload(files) {
+      var xhr = new XMLHttpRequest();
+      this.xhr = xhr;
+      var self = this;
+      this.xhr.upload.addEventListener("progress", function (e) {
+        if (e.lengthComputable) {
+          var percentage = Math.round((e.loaded * 100) / e.total);
+          console.log(percentage);
+        }
+      }, false);
+
+      xhr.upload.addEventListener("load", function (e) {
+        console.log(100);
+      }, false);
+      xhr.open("POST", "http://localhost:8081/file_upload", true);
+      const formData = new FormData();
+      Array.prototype.forEach.call(files, file => {
+        formData.append('file', file)
+      });
+      xhr.send(formData)
+    }
+  </script>
+</body>
+
+</html>
