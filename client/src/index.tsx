@@ -20,7 +20,10 @@ function App() {
     Array.prototype.forEach.call(files, (file: File) => {
       formData.append('file', file)
     });
-    axios.post('http://localhost:8081/file_upload', formData, {
+    axios({
+      url:'http://localhost:8081/file_upload',
+      method:'POST',
+      data:formData,
       onUploadProgress(progress) {
         setProgress(100 * ( progress.loaded / progress.total)) 
         console.log(100 * ( progress.loaded / progress.total))

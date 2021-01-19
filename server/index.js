@@ -21,7 +21,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // multer 用于解析post文件  multipart/form-data
 // var objMulter = multer({dest: './dist'}).array('file');
 // 或者 var objMulter = multer({dest: './dist'}).any();
-app.use(multer({ dest: './dist' }).array('file'));  //此处的array('file')对应html部分的name
+app.use(multer({ dest: './files' }).array('file'));  //此处的array('file')对应html部分的name
 // app.use(objMulter );
 
 app.post('/file_upload', function (req, res) {
